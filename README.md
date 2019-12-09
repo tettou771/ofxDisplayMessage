@@ -27,6 +27,20 @@ You can use some method to change appearance.
 For example.
 
 ```cpp
-ofxDisplayMessage
+// set position
+// message align with text boundingbox center
+ofxDisplayMessage::setPos(500, 1000);
+
+// set text color
+// default value is ofColor::gray
+ofxDisplayMessage::setColor(ofColor(0, 0, 0));
+
+// set font
+// draw with ofTrueTypeFont if loaded
+ofxDisplayMessage::loadFont("arial.ttf", 30);
+
+// change display duration (sec)
+// default value is 5.0
+ofxDisplayMessage::setDuration(10);
 ```
 
