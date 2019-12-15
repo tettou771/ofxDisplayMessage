@@ -12,6 +12,7 @@ ofxDisplayMessage doesn't depend other addons.
 ## Tested system
 
 - Windows 10 + VS2017 +  of0.10.1 .
+- Mac OS 10.14 + XCode 10.2.1 + of0.10.1
 
 I think compatible almost all versions, because it's simple addon.
 
