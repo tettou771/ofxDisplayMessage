@@ -13,6 +13,9 @@ void ofApp::setup() {
 	// change display duration (sec)
 	// default value is 5.0
 	ofxDisplayMessage::setDuration(10);
+    
+    // initial display message
+    ofxDisplayMessage::setMessage("Please key or mouse press.");
 }
 
 //--------------------------------------------------------------

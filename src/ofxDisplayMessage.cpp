@@ -1,4 +1,4 @@
-﻿#include "ofxDisplayMessage.h"
+#include "ofxDisplayMessage.h"
 
 ofxDisplayMessage* ofxDisplayMessage::singleton;
 
@@ -7,6 +7,7 @@ ofxDisplayMessage::ofxDisplayMessage() {
 	ofAddListener(ofEvents().draw, this, &ofxDisplayMessage::draw);
 	initialized = true;
 	logEnabled = true;
+    showing = true;
 	color = ofColor::gray;
 	pos.set(ofGetWidth() / 2, ofGetHeight() / 2);
 }

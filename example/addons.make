@@ -1,1 +1,1 @@
-ofxDispayMessage
+ofxDisplayMessage
