@@ -33,15 +33,22 @@ For example.
 ofxDisplayMessage::setPos(500, 1000);
 
 // set text color
-// default value is ofColor::gray
+// default: ofColor::gray
 ofxDisplayMessage::setColor(ofColor(0, 0, 0));
 
+// set text background color
+// default: ofColor(0, 0);
+ofxDisplayMessage::setBackgroundColor(ofColor(255, 255, 0));
+	
 // set font
 // draw with ofTrueTypeFont if loaded
 ofxDisplayMessage::loadFont("arial.ttf", 30);
 
 // change display duration (sec)
-// default value is 5.0
+// default: 5.0
 ofxDisplayMessage::setDuration(10);
+    
+// initial display message
+ofxDisplayMessage::setMessage("Please key or mouse press.");
 ```
 

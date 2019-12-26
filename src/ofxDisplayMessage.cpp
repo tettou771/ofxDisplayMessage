@@ -9,6 +9,7 @@ ofxDisplayMessage::ofxDisplayMessage() {
 	logEnabled = true;
     showing = true;
 	color = ofColor::gray;
+	bgColor = ofColor(0, 0);
 	pos.set(ofGetWidth() / 2, ofGetHeight() / 2);
 }
 
@@ -18,13 +19,20 @@ ofxDisplayMessage::~ofxDisplayMessage() {
 
 void ofxDisplayMessage::draw(ofEventArgs& e) {
 	if (showing && ofGetElapsedTimef() - pastSetMessageTimef < messageDuration) {
-		ofSetColor(color);
+		ofPushStyle();
 		if (font.isLoaded()) {
+			if (bgColor.a > 0) {
+				ofSetColor(bgColor);
+				ofDrawRectangle(font.getStringBoundingBox(message, drawPos.x, drawPos.y));
+			}
+
+			ofSetColor(color);
 			font.drawString(message, drawPos.x, drawPos.y);
 		}
 		else {
-			ofDrawBitmapString(message, drawPos);
+			ofDrawBitmapStringHighlight(message, drawPos, bgColor, color);
 		}
+		ofPopStyle();
 	}
 }
 
@@ -100,6 +108,16 @@ void ofxDisplayMessage::setColor(ofColor _color) {
 ofColor ofxDisplayMessage::getColor() {
 	singletonGenerate();
 	return singleton->color;
+}
+
+void ofxDisplayMessage::setBackgroundColor(ofColor _color) {
+	singletonGenerate();
+	singleton->bgColor.set(_color);
+}
+
+ofColor ofxDisplayMessage::getBackgroundColor() {
+	singletonGenerate();
+	return singleton->bgColor;
 }
 
 void ofxDisplayMessage::setShowing(bool _showing) {

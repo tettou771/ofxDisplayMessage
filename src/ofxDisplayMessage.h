@@ -1,9 +1,6 @@
 ﻿#pragma once
 #include "ofMain.h"
 
-// 何かしらのメッセージを画面下に表示するクラス
-// 一定時間後に消える
-
 class ofxDisplayMessage
 {
 private:
@@ -11,9 +8,9 @@ private:
 	~ofxDisplayMessage();
 
 public:
-	// singleton menber
 	void draw(ofEventArgs &e);
 
+	// static methods
 	static void loadFont(string _path, float _size);
 	static void setMessage(string _message);
 	static void clearMessage();
@@ -24,6 +21,8 @@ public:
 	static ofVec2f getPos();
 	static void setColor(ofColor _color);
 	static ofColor getColor();
+	static void setBackgroundColor(ofColor _color);
+	static ofColor getBackgroundColor();
 	static void setShowing(bool _showing);
 	static bool getSwhoing();
 	static void toggleShowing();
@@ -31,13 +30,10 @@ public:
 	static bool getLogEnabled();
 
 private:
-	static ofxDisplayMessage *singleton;
-	static void singletonGenerate();
-
 	bool initialized;
 	bool showing;
 	bool logEnabled;
-	ofColor color;
+	ofColor color, bgColor;
 	ofVec2f pos;
 	ofVec2f drawPos;
 	ofMutex mutex;
@@ -46,5 +42,9 @@ private:
 	float messageDuration; // sec
 	float pastSetMessageTimef;
 	ofTrueTypeFont font;
+
+	// static member
+	static ofxDisplayMessage* singleton;
+	static void singletonGenerate();
 };
 
