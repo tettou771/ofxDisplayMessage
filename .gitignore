@@ -4,3 +4,4 @@ example*/*
 !example*/bin
 example*/bin/*
 !example*/bin/data
+.DS_Store

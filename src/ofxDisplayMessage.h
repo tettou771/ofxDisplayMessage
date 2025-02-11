@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ofMain.h"
 
 class ofxDisplayMessage
@@ -36,6 +36,7 @@ private:
 	ofColor color, bgColor;
 	ofVec2f pos;
 	ofVec2f drawPos;
+    ofVec2f drawSize;
 	ofMutex mutex;
 
 	string message;
@@ -46,5 +47,9 @@ private:
 	// static member
 	static ofxDisplayMessage* singleton;
 	static void singletonGenerate();
+    
+    // helper method
+    // get string width with '\n'
+    float getMessageStringWidth();
 };
 

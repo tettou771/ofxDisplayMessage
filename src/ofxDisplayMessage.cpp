@@ -23,7 +23,7 @@ void ofxDisplayMessage::draw(ofEventArgs& e) {
 		if (font.isLoaded()) {
 			if (bgColor.a > 0) {
 				ofSetColor(bgColor);
-				ofDrawRectangle(font.getStringBoundingBox(message, drawPos.x, drawPos.y));
+				ofDrawRectangle(drawPos.x, drawPos.y - font.getSize(), drawSize.x, drawSize.y);
 			}
 
 			ofSetColor(color);
@@ -52,10 +52,10 @@ void ofxDisplayMessage::setMessage(string _message) {
 	singleton->pastSetMessageTimef = ofGetElapsedTimef();
 
 	// calc position
-	float width, height, lineHeight;
+	float lineHeight;
 	if (singleton->font.isLoaded()) {
-		width = singleton->font.stringWidth(singleton->message);
-		height = singleton->font.stringHeight(singleton->message);
+        singleton->drawSize.x = singleton->getMessageStringWidth();
+        singleton->drawSize.y = singleton->font.stringHeight(singleton->message);
 		lineHeight = singleton->font.getSize();
 	}
 	else {
@@ -64,11 +64,11 @@ void ofxDisplayMessage::setMessage(string _message) {
 		for (auto& line : lines) {
 			maxLineLength = MAX(maxLineLength, line.length());
 		}
-		width = maxLineLength * 8;
+		singleton->drawSize.x = maxLineLength * 8;
 		lineHeight = 10;
-		height = 13.5 * lines.size();
+        singleton->drawSize.y = 13.5 * lines.size();
 	}
-	singleton->drawPos = singleton->pos - ofVec2f(width / 2, height / 2 - lineHeight);
+	singleton->drawPos = singleton->pos - ofVec2f(singleton->drawSize.x / 2, singleton->drawSize.y / 2 - lineHeight);
 }
 
 void ofxDisplayMessage::clearMessage() {
@@ -149,4 +149,14 @@ void ofxDisplayMessage::singletonGenerate() {
 	if (singleton == nullptr) {
 		singleton = new ofxDisplayMessage();
 	}
+}
+
+float ofxDisplayMessage::getMessageStringWidth() {
+    // split by \n
+    // find most big line width
+    float maxWidth = 0;
+    for (auto &line : ofSplitString(message, "\n")) {
+        maxWidth = MAX(maxWidth, font.stringWidth(line));
+    }
+    return maxWidth;
 }
